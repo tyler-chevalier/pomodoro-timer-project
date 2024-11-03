@@ -4,25 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>kari's pomodoro timer</title>
+    <title>Pomodoro Timer</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <main>
-        <div class="content-container"> 
+        <div class="content-container">
             <div class="title-container">
-                <h2 id="message">Time to study >:3</h2>
+                <h2>Time to study >:3</h2>
             </div>
             <div class="timer">
                <h1 id="timer-display">25:00</h1>
             </div>
-            <div>
-                <button id="start/pause-button" onclick="startOrPauseTimer()" class="button">start :></button>
-            </div>
+            <div id="message" class="message"></div>
             <div class="button-container">
-                <button onclick="study()" class="button">study :0</button>
-                <button onclick="shortBreak()" class="button">short break :)</button>
-                <button onclick="longBreak()" class="button">long break (woah.)</button>
+                <button onclick="study()" id="start/pause-button" class="button">Start :></button>
+                <button onclick="shortBreak()" class="button">Short Break :)</button>
+                <button onclick="longBreak()" class="button">Long Break (woah.)</button>
             </div>
         </div>
     </main>

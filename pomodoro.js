@@ -1,6 +1,10 @@
 let timer;
 let timeLeft;
 let running = false;
+let state = "";
+let studyTime = 25*60
+let shortBreakTime = 5*60
+let longBreakTime = 15*60
 
 function startTimer(duration) {
     timeLeft = duration;
@@ -8,29 +12,29 @@ function startTimer(duration) {
 
     timer = setInterval(() => {
         if (timeLeft <= 0) {
-            clearInterval(timer); // Stop the timer
-            alert("Time's up!"); // Notify the user
-            running = false; // Reset running state
-            updateButtonText(); // Update button text after timer ends
+            clearInterval(timer);
+            alert("Time's up!"); 
+            running = false;
+            updateButtonText();
         } else {
-            timeLeft--; // Decrement time by 1 second
-            displayTime(); // Update the display
+            timeLeft--; 
+            displayTime();
         }
     }, 1000);
 }
 
 function pauseTimer() {
-    clearInterval(timer); // Pause the timer
-    running = false; // Update the running state
-    updateButtonText(); // Update button text to indicate paused state
+    clearInterval(timer);
+    running = false;
+    updateButtonText();
 }
 
-function resetTimer(time) {
+function resetTimer(duration) {
     clearInterval(timer);
-    timeLeft = time; // Reset to 25 minutes
-    running = false; // Reset running state
+    timeLeft = duration;
+    running = false;
     displayTime();
-    updateButtonText(); // Update button text after reset
+    updateButtonText();
 }
 
 function displayTime() {
@@ -44,35 +48,38 @@ function updateButtonText() {
     button.textContent = running ? 'Pause :p' : 'Start :>';
 }
 
-function startOrPauseTimer(duration) {
+function startOrPauseTimer() {
     if (running) {
-        pauseTimer(); // If running, pause the timer
+        pauseTimer();
     } else {
-        // If not running, start the timer with current timeLeft or from the specified duration
-        if (timeLeft === undefined) { // If timeLeft is undefined, set to duration
-            startTimer(duration);
-        } else {
-            startTimer(timeLeft); // Resume from the current time left
-        }
-        updateButtonText(); // Update button text to reflect running state
+        startTimer(timeLeft || studyTime); 
+        updateButtonText();
     }
 }
 
-function pomodoro() {
-    startOrPauseTimer(25 * 60); // Start Pomodoro timer
-    document.getElementById("message").textContent = 'lock in.'
+function study() {
+    if (state !== "study") {
+        resetTimer(studyTime);
+        state = "study";
+        document.getElementById("message").textContent = 'lock in.';
+    }
+    startOrPauseTimer();
 }
 
 function shortBreak() {
-    resetTimer(5*60)
-    startOrPauseTimer(5 * 60); // Start short break timer
-    document.getElementById("message").textContent = 'time for a short break!'
-
+    if (state !== "short") {
+        resetTimer(shortBreakTime);
+        state = "short";
+        document.getElementById("message").textContent = 'time for a short break!';
+    }
+    startOrPauseTimer();
 }
 
 function longBreak() {
-    resetTimer(15*60)
-    startOrPauseTimer(15 * 60); // Start long break timer
-    document.getElementById("message").textContent = 'time for a long break!!'
-
+    if (state !== "long") {
+        resetTimer(longBreakTime);
+        state = "long";
+        document.getElementById("message").textContent = 'time for a long break!!';
+    }
+    startOrPauseTimer();
 }

@@ -37,7 +37,7 @@ body {
     text-align: center;
     display: inline-block;
     font-size: 20px;
-    margin: 4px 2px;
+    margin: 20px 2px;
     cursor: pointer;
     border-radius: 50px;
     width: 175px;
@@ -47,7 +47,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-top: 0px;
+    margin-top: px;
   }
   .title-container {
     color: #3A2A7E ; /* White text */
