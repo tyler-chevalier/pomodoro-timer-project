@@ -25,9 +25,9 @@ function pauseTimer() {
     updateButtonText(); // Update button text to indicate paused state
 }
 
-function resetTimer() {
+function resetTimer(time) {
     clearInterval(timer);
-    timeLeft = 25 * 60; // Reset to 25 minutes
+    timeLeft = time; // Reset to 25 minutes
     running = false; // Reset running state
     displayTime();
     updateButtonText(); // Update button text after reset
@@ -64,12 +64,14 @@ function pomodoro() {
 }
 
 function shortBreak() {
+    resetTimer(5*60)
     startOrPauseTimer(5 * 60); // Start short break timer
     document.getElementById("message").textContent = 'time for a short break!'
 
 }
 
 function longBreak() {
+    resetTimer(15*60)
     startOrPauseTimer(15 * 60); // Start long break timer
     document.getElementById("message").textContent = 'time for a long break!!'
 
